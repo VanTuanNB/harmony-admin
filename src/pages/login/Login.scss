@@ -1,0 +1,67 @@
+body {
+  background-color: rgb(123, 226, 171);
+}
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  .title {
+    color: #11e795;
+    padding: 30px;
+    text-align: center;
+  }
+  .user-box {
+    position: relative;
+    input:focus + label,
+    input:valid + label {
+      top: -25px;
+      font-size: 12px;
+    }
+  }
+  .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    outline: none;
+    background: transparent;
+  }
+  .user-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 10px;
+    font-size: 16px;
+    color: #11e795;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  .button {
+    background-color: #11e795; // Màu nền của nút
+    color: #fff; // Màu chữ trắng
+    border: none; // Loại bỏ border
+    padding: 10px 20px; // Kích thước padding theo chiều ngang và dọc
+    font-size: 16px; // Kích thước chữ
+    border-radius: 5px; // Bo góc nút
+    cursor: pointer; // Biểu tượng con trỏ khi hover
+    transition: background-color 0.3s, color 0.3s; // Hiệu ứng chuyển đổi màu nền và màu chữ
+    outline: none; // Loại bỏ viền khi focus
+    display: block; // Hiển thị block để căn giữa ngang
+
+    &:hover {
+      background-color: #0ca577; // Màu nền khi hover
+    }
+
+    &:focus {
+      background-color: #0ca577; // Màu nền khi focus
+    }
+  }
+}
