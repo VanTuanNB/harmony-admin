@@ -2,17 +2,21 @@ import "./Login.scss";
 const Login = () => {
   return (
     <div className="login-box">
-      <h2 className="title">Đăng nhập</h2>
-      <form action="">
+      <form>
         <div className="user-box">
-          <input type="text" required />
-          <label htmlFor="">Email</label>
+          <input type="email" name="" required />
+          <label>Email</label>
         </div>
         <div className="user-box">
-          <input type="password" required />
-          <label htmlFor="">Password</label>
+          <input type="password" name="" required />
+          <label>Mật khẩu</label>
         </div>
-        <button className="button">Đăng nhập</button>
+        <center>
+          <a href="#">
+            Đăng nhập
+            <span></span>
+          </a>
+        </center>
       </form>
     </div>
   );
