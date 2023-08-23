@@ -22,20 +22,20 @@ const columns: GridColDef[] = [
     width: 250,
   },
   {
-    field: "Album",
+    field: "album",
     type: "string",
-    headerName: "Album",
+    headerName: "album",
     width: 150,
   },
   {
-    field: "Composer",
+    field: "composer",
     type: "string",
-    headerName: "Composer",
+    headerName: "composer",
     width: 200,
   },
   {
-    field: "Views",
-    headerName: "Views",
+    field: "view",
+    headerName: "view",
     type: "string",
     width: 200,
   },
@@ -69,8 +69,7 @@ const Products = () => {
   return (
     <div className="products">
       <div className="info">
-        <h1>Products</h1>
-        <button onClick={() => setOpen(true)}>Add New Products</button>
+        <h1>Songs</h1>
       </div>
       <DataTable slug="products" columns={columns} rows={products} />
       {/* TEST THE API */}

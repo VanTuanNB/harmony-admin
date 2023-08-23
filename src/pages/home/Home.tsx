@@ -1,6 +1,8 @@
 import BarChartBox from "../../components/barChartBox/BarChartBox";
 import BigChartBox from "../../components/bigChartBox/BigChartBox";
 import ChartBox from "../../components/chartBox/ChartBox";
+import { useEffect, useState } from "react";
+import axios from 'axios'
 import PieChartBox from "../../components/pieCartBox/PieChartBox";
 import TopBox from "../../components/topBox/TopBox";
 import {
@@ -14,22 +16,51 @@ import {
 import "./home.scss";
 
 const Home = () => {
+  const [totalUser, setTotalUser] = useState<any>()
+  const [totalSong, setTotalSong] = useState<any>()
+
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/v1/song/').then(res => {
+      setTotalSong({
+        color: "skyblue",
+        icon: "/productIcon.svg",
+        title: "Total Songs",
+        number: res.data.data.length,
+        dataKey: "songs",
+        percentage: 21, 
+      })
+    })
+    axios.get('http://localhost:5000/api/v1/user/').then(res => {
+      setTotalUser({
+        color: "#8884d8",
+        icon: "/userIcon.svg",
+        title: "Total Users",
+        number: res.data.data.length,
+        dataKey: "users",
+        percentage: 45,
+      })
+    })
+  }, [])
+
+
   return (
     <div className="home">
+
       <div className="box box2">
-        <ChartBox {...chartBoxUser} />
+        <ChartBox {...totalUser} />
       </div>
       <div className="box box3">
-        <ChartBox {...chartBoxProduct} />
+        <ChartBox {...totalSong} />
       </div>
       <div className="box box4">
         <PieChartBox />
       </div>
-      
+
       <div className="box box7">
         <BigChartBox />
       </div>
-      
+
     </div>
   );
 };
