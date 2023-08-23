@@ -14,14 +14,22 @@ import {
   chartBoxUser,
 } from "../../data";
 import "./home.scss";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [totalUser, setTotalUser] = useState<any>()
   const [totalSong, setTotalSong] = useState<any>()
-
-
+  const localStorageInstance = JSON.parse(localStorage.getItem('info') ?? "null");
+  const navigate = useNavigate();
+  if (!localStorageInstance) 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/song/').then(res => {
+    if (!localStorageInstance) {
+      navigate('/login')
+      return
+    }
+}, [localStorageInstance])
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/v1/song/').then((res: any) => {
       setTotalSong({
         color: "skyblue",
         icon: "/productIcon.svg",
@@ -31,7 +39,7 @@ const Home = () => {
         percentage: 21, 
       })
     })
-    axios.get('http://localhost:5000/api/v1/user/').then(res => {
+    axios.get('http://localhost:5000/api/v1/user/').then((res: any) => {
       setTotalUser({
         color: "#8884d8",
         icon: "/userIcon.svg",
