@@ -1,14 +1,42 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import "./pieChartBox.scss";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const data = [
-  { name: "Lofi", value: 400, color: "#0088FE" },
-  { name: "Ballad", value: 300, color: "#00C49F" },
-  { name: "Rap", value: 300, color: "#FFBB28" },
-  { name: "Chill", value: 200, color: "#FF8042" },
+const color = [
+  "#0088FE",
+   "#00C49F",
+  "#FFBB28" ,
+   "#FF8042" 
 ];
 
+interface iGenre{
+  title: string,
+  _id: string,
+  listSong: string[],
+}
+interface IData{
+  name: string,
+  value: number,
+  color: string,
+}
+
 const PieChartBox = () => {
+  const [data, setData] = useState<IData[]>()
+
+
+  useEffect(()=>{
+    axios.get('http://localhost:5000/api/v1/genre/topListsong').then(response=>{
+     const data1 = response.data.data.map((item:iGenre, index: number) =>({
+      name: item.title,
+      value: item.listSong.length,
+      color: color[index % color.length]
+    }))
+    setData(data1)
+   })
+  },[])
+  
+  
   return (
     <div className="pieChartBox">
       <h1>Total Genre Songs</h1>
@@ -25,7 +53,7 @@ const PieChartBox = () => {
               paddingAngle={5}
               dataKey="value"
             >
-              {data.map((item) => (
+              {data && data.map((item) => (
                 <Cell key={item.name} fill={item.color} />
               ))}
             </Pie>
@@ -33,7 +61,7 @@ const PieChartBox = () => {
         </ResponsiveContainer>
       </div>
       <div className="options">
-        {data.map((item) => (
+        {data?.map((item) => (
           <div className="option" key={item.name}>
             <div className="title">
               <div className="dot" style={{ backgroundColor: item.color }} />
